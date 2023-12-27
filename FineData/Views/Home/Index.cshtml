@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<PersonCar>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div class="row justify-content-center">
+        <div class="">
+            <table class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Plate</th>
+                        <th>Model</th>
+                        <th>Brand</th>
+                        <th>Fine</th>
+                        <th>Person</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Plate</td>
+                            <td>@item.Model</td>
+                            <td>@item.Brand</td>
+                            <td>@item.Fine</td>
+                            <td>@item.Person</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
