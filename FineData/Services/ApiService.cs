@@ -35,6 +35,9 @@ namespace FineData.Services
             using var httpResponseMessagePeople =
                 await _httpClient.GetAsync("/api/Person");
 
+            if (!httpResponseMessageCars.IsSuccessStatusCode || !httpResponseMessagePeople.IsSuccessStatusCode)
+                return personCars;
+
             if (httpResponseMessageCars.IsSuccessStatusCode)
                 carsJson = await httpResponseMessageCars.Content.ReadAsStringAsync();
 

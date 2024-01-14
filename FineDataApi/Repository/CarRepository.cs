@@ -1,4 +1,5 @@
-﻿using FineData.Persistence;
+﻿using FineData.Domain;
+using FineData.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace FineDataApi.Repository
@@ -14,24 +15,46 @@ namespace FineDataApi.Repository
 
         public async Task ImportBulkCar(IList<Model.Car> cars)
         {
-            var carsToAdd = cars.Select(c => new FineData.Domain.Car
-            {
-                Year = c.Year,
-                CarBrand = c.CarBrand,
-                CarModel = c.CarMode,
-                Color = c.Color,
-                Plate = c.Plate,
-                Person = _fineDataContext.People.FirstOrDefault(p => p.CodiceFiscale == c.CodiceFiscale)!
-            });
+            var carsToUpdate = new List<FineData.Domain.Car>();
 
-            var carsWithoutOwner = carsToAdd.Where(c => c.Person == null);
+            foreach (var car in cars)
+            {
+                var carDb = _fineDataContext.Cars.FirstOrDefault(c => c.Plate == car.Plate);
+
+                if (carDb != null)
+                {
+                    carDb.CarBrand = car.CarBrand;
+                    carDb.Year = car.Year;
+                    carDb.Color = car.Color;
+                    carDb.CarModel = car.CarMode;
+                    carDb.Person = _fineDataContext.People.FirstOrDefault(p => p.CodiceFiscale == car.CodiceFiscale)!;
+
+                    carsToUpdate.Add(carDb);
+                }
+                else
+                {
+                    var carToAdd = new Car
+                    {
+                        Year = car.Year,
+                        CarBrand = car.CarBrand,
+                        CarModel = car.CarMode,
+                        Color = car.Color,
+                        Plate = car.Plate,
+                        Person = _fineDataContext.People.FirstOrDefault(p => p.CodiceFiscale == car.CodiceFiscale)!
+                    };
+
+                    carsToUpdate.Add(carToAdd);
+                }
+            }
+
+            var carsWithoutOwner = carsToUpdate.Where(c => c.Person == null);
 
             if (carsWithoutOwner.Any()) 
             {
-                throw new Exception();
+                throw new Exception("Car(s) Without Owner Found");
             }
-
-            _fineDataContext.Cars.AddRange(carsToAdd);
+            
+            _fineDataContext.Cars.UpdateRange(carsToUpdate);
             await _fineDataContext.SaveChangesAsync();
         }
 
