@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FineData", "FineData\FineData.csproj", "{2D04BB62-0125-4BBE-9BFF-FDA24A7EEA18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FineData", "src\FineData\FineData.csproj", "{2D04BB62-0125-4BBE-9BFF-FDA24A7EEA18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FineDataApi", "FineDataApi\FineDataApi.csproj", "{6B1A51D7-56D8-4068-A22F-B56A0F25663F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FineDataApi", "src\FineDataApi\FineDataApi.csproj", "{6B1A51D7-56D8-4068-A22F-B56A0F25663F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FineData.Domain", "src\FineData.Domain\FineData.Domain.csproj", "{EDB45C45-11E7-4B8F-97E7-0AF57BE67854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FineData.Persistence", "FineData.Persistence\FineData.Persistence.csproj", "{9E860565-4672-4041-A973-AFAAF9452B8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FineData.Persistence", "src\FineData.Persistence\FineData.Persistence.csproj", "{9E860565-4672-4041-A973-AFAAF9452B8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
